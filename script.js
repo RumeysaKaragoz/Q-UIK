@@ -6,34 +6,43 @@ window.addEventListener('offline', updateOnlineStatus);
 async function fetchData() {
     const offlineBanner = document.getElementById('offline-banner');
     
+    // 1. ADIM: Tarayıcı gerçekten offline mı?
+    if (!navigator.onLine) {
+        offlineBanner.innerText = "⚠️ İnternet bağlantınız yok. Eski veriler gösteriliyor.";
+        offlineBanner.classList.remove('hidden');
+    }
+
     try {
         const response = await fetch(API_URL);
         
-        if (!response.ok) {
-            throw new Error(`Sunucu Hatası: ${response.status}`);
-        }
-        
+        if (!response.ok) throw new Error("API'ye ulaşılamıyor.");
+
         allData = await response.json();
         
-        // Veri başarıyla geldiyse
+        // Veri başarıyla geldiyse ve internet varsa banner'ı KESİN gizle
+        if (navigator.onLine) {
+            offlineBanner.classList.add('hidden');
+        }
+
         localStorage.setItem('last_cached_data', JSON.stringify(allData));
         generateCategoryButtons(allData);
         renderData(allData);
-        
-        // Eğer tarayıcı online ise banner'ı gizle
-        if(navigator.onLine) offlineBanner.classList.add('hidden');
 
     } catch (error) {
-        console.error("Veri çekme hatası:", error); // Hatayı konsolda gör (F12)
+        console.error("Yükleme hatası:", error);
         
-        // Sadece internet yoksa veya cache'de veri varsa göster
+        // Hata durumunda cache'den yükle
         const cachedData = localStorage.getItem('last_cached_data');
         if (cachedData) {
             allData = JSON.parse(cachedData);
             generateCategoryButtons(allData);
             renderData(allData);
-            offlineBanner.classList.remove('hidden');
-            offlineBanner.innerText = "⚠️ Sunucuya bağlanılamadı. Önbellekteki veriler gösteriliyor.";
+        }
+        
+        // Sadece internet yoksa veya API çöktüyse banner kalsın
+        offlineBanner.classList.remove('hidden');
+        if (navigator.onLine) {
+            offlineBanner.innerText = "⚠️ Sunucu ile bağlantı kurulamadı. Önbellekteki veriler aktif.";
         }
     }
 }
