@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deprem Yardım Koordinasyon</title>
+    <link rel="stylesheet" href="style.css"> </head>
+<body>
+    <div id="offline-banner" class="hidden">⚠️ Şu an çevrimdışısınız. Son veriler gösteriliyor.</div>
+
+    <header>
+        <h1>Yardım Talepleri</h1>
+       <div class="filters">
+    <button onclick="filterRequests('hepsi')">🌐 Hepsi</button>
+    <button onclick="filterRequests('acil')">🚨 ACİL</button>
+    <button onclick="filterRequests('gida')">🍲 Gıda</button>
+    <button onclick="filterRequests('barinma')">🏠 Barınma</button>
+    <button onclick="filterRequests('saglik')">💊 Sağlık</button>
+</div>
+    </header>
+
+    <main id="app">
+        <div id="loader">Veriler yükleniyor...</div>
+        <div id="request-list"></div>
+    </main>
+
+    <section id="my-tasks">
+        <h2>Üstlendiğim Görevler</h2>
+        <div id="saved-tasks"></div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>

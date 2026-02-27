@@ -1,0 +1,88 @@
+/* style.css */
+body {
+    background-color: #000; /* Pil tasarrufu için tam siyah */
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    margin: 0; padding: 10px;
+}
+
+#offline-banner {
+    background: #ffcc00; color: #000;
+    text-align: center; padding: 10px; font-weight: bold;
+    position: sticky; top: 0; z-index: 100;
+}
+
+.card {
+    background: #1a1a1a;
+    border-left: 8px solid #555; /* Varsayılan renk */
+    margin: 15px 0; padding: 15px;
+    border-radius: 8px;
+}
+
+
+button {
+    background: #fff; color: #000;
+    border: none; padding: 12px; font-weight: bold;
+    width: 100%; border-radius: 5px; margin-top: 10px;
+}
+
+.done-btn { background: #28a745; color: white; } /* Görev Tamamla */
+.completed { opacity: 0.5; text-decoration: line-through; border-left-color: #28a745 !important; }
+
+.filters { display: flex; gap: 5px; overflow-x: auto; padding-bottom: 10px; }
+.filters button { width: auto; font-size: 12px; white-space: nowrap; }
+/* Acil olanlar için özel stil (Kırmızı yanıp sönen sol kenar) */
+.urgent-card {
+    border-left: 10px solid #ff0000 !important;
+    background: linear-gradient(90deg, #330000 0%, #1a1a1a 100%);
+}
+
+/* İhtiyaç ve Destek ayrımı */
+.type-ihtiyac { border-left: 6px solid #ff8800; } /* Turuncu */
+.type-destek { border-left: 6px solid #007bff; }  /* Mavi */
+
+/* Kart içindeki etiketler */
+.badge {
+    font-size: 10px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    background: #444;
+}
+
+.category-tag {
+    font-size: 10px;
+    color: #aaa;
+    margin-left: 10px;
+}
+
+.card-header { margin-bottom: 10px; }
+.detay { font-size: 14px; color: #ddd; line-height: 1.4; }
+.filters {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto; /* Yatay kaydırma */
+    padding: 10px 5px;
+    -webkit-overflow-scrolling: touch; /* iOS için pürüzsüz kaydırma */
+    scrollbar-width: none; /* Firefox için scroll gizleme */
+}
+
+.filters::-webkit-scrollbar {
+    display: none; /* Chrome/Safari için scroll gizleme */
+}
+
+.filters button {
+    flex: 0 0 auto; /* Butonların sıkışmasını engeller */
+    background: #222;
+    color: white;
+    border: 1px solid #444;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.urgent-btn {
+    border: 1px solid #ff0000 !important;
+    color: #ff0000 !important;
+    font-weight: bold;
+}
